@@ -1,7 +1,7 @@
 "use strict";
 const uuidV4 = require('uuid/v4')
-
-var Parser = require('tap-parser');
+const prettyjson = require('prettyjson');
+const Parser = require('tap-parser');
 
 class TapTest {
     constructor (assert, suite) {
@@ -21,10 +21,28 @@ class TapTest {
     }
 
     pending() {
-        return false;
+        return this.assert.todo != undefined;
     }
     skipped() {
-        return false;
+        return this.assert.skip != undefined;
+    }
+
+    context() {
+        var r = "";
+        if (this._comments) {
+            r += this._comments.join('');
+        }
+        if (this.assert.diag) {
+            r += "\n\n"+ prettyjson.render(this.assert.diag, { noColor: true } );
+        }
+
+        if (this.skipped()) {
+            r += "\nSKIP: "+this.assert.skip;
+        }
+        if (this.pending()) {
+            r += "\nTODO: "+this.assert.todo;
+        }
+        return r;
     }
 
     json() {
@@ -44,29 +62,22 @@ class TapTest {
             'parentUUID': this.parent.uuid,
             'skipped': this.skipped(), //fixme
             'isHook': false,
-            'context': "",//this._comments,
+            'context': this.context(),
             'state': formatState(this.assert.ok),
-            'err': {} //fimxe 
+            'err': formatError(this.assert.diag)
         }
     }
 }
 
-function formatError (error){
-    let err = {}
-
-    if (error) {
-        err.name = error.type
-        err.message = error.message
-        err.estack = error.stack
-        err.stack = error.stack
-        if (error.actual && error.expected) {
-            err.showDiff = true
-            err.actual = error.actual
-            err.expected = error.expected
-        }
+function formatError (diag){
+    if (diag) return {
+        'name':"",
+        'message':"",
+        "showDiff": true,
+        'actual':diag.actual,
+        'expected':diag.expected,
     }
-
-    return err
+    return {};
 }
 
 
@@ -135,9 +146,29 @@ class TapSuite {
     _getChildenSuitesFuncCount(fname) {
         const childrenCounts =  this.suites.map(function(i){return i[fname]()});
         if (childrenCounts.length==0) return 0;
-        console.log(childrenCounts, fname);
         return childrenCounts.reduce(function(a, v) { return a + v; });
     }
+
+    _getTestsFilteredUUIDs(fname) {
+        return this.tests.filter(t=> {return t[fname](); }).map(t=>{return t.uuid});
+    }
+
+    skippedUUIDs() {
+        return this._getTestsFilteredUUIDs('skipped');
+    }
+
+    passesUUIDs() {
+        return this._getTestsFilteredUUIDs('pass');
+    }
+
+    failuresUUIDs() {
+        return this._getTestsFilteredUUIDs('fail');
+    }
+
+    pendingUUIDs() {
+        return this._getTestsFilteredUUIDs('pending');
+    }
+
     testsCount() {
         return this.tests.length + this._getChildenSuitesFuncCount("testsCount");
     }
@@ -167,7 +198,6 @@ class TapSuite {
     }
 
     passesCount() {
-        console.dir(this);
         return this.passes().length + this._getChildenSuitesFuncCount("passesCount");
     }
 
@@ -177,18 +207,20 @@ class TapSuite {
 
 
 
+
+
     json() {
         return {
             'title': this.name,
             'suites': this.suites.map(function(i){return i.json()}),
             'tests': this.tests.map(function(i){return i.json()}),
-            'pending': this.pending().length,
             'root': this.isRoot,
             'fullFile': '',
             'file': '',
-            'passes': this.passes().length,
-            'failures': this.failures().length,
-            'skipped': this.skipped().length,
+            'pending': this.pendingUUIDs(),
+            'passes': this.passesUUIDs(),
+            'failures': this.failuresUUIDs(),
+            'skipped': this.skippedUUIDs(),
             'duration': 0,
             'rootEmpty': false,
             '_timeout': 0,
