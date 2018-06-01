@@ -1,0 +1,18 @@
+{
+  "name": "tap-mochawesome-reporter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tap_to_awesome.js",
+  "directories": {
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-stringify-safe": "^5.0.1",
+    "tap-parser": "^7.0.0",
+    "uuid": "^3.2.1"
+  }
+}

@@ -1,0 +1,6 @@
+TAP version 13
+ok 1 - reporter type should be "unknown".
+ok 2 - should have correct error msg
+ok 3 - able to require reporter from module path
+1..3
+# time=8.278ms
