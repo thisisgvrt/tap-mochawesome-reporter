@@ -1,6 +1,6 @@
 {
   "name": "tap-mochawesome-reporter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "bin": "tap_to_awesome.js",

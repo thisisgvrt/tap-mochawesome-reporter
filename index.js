@@ -191,15 +191,15 @@ class TapSuite {
 
 
     pendingCount() {
-        return this.pending().length + this._getChildenSuitesFuncCount("pendingCount");
+        return (this.pending().length + this._getChildenSuitesFuncCount("pendingCount"))||0;
     }
 
     passesCount() {
-        return this.passes().length + this._getChildenSuitesFuncCount("passesCount");
+        return (this.passes().length + this._getChildenSuitesFuncCount("passesCount"))||0;
     }
 
     failuresCount() {
-        return this.failures().length + this._getChildenSuitesFuncCount("failuresCount");
+        return (this.failures().length + this._getChildenSuitesFuncCount("failuresCount"))||0;
     }
 
 
