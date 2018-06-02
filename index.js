@@ -36,20 +36,17 @@ class TapTest {
             r += "\n\n"+ prettyjson.render(this.assert.diag, { noColor: true } );
         }
 
-        if (this.skipped()) {
-            r += "\nSKIP: "+this.assert.skip;
-        }
-        if (this.pending()) {
-            r += "\nTODO: "+this.assert.todo;
-        }
-        return r;
+        return JSON.stringify(r, null, 4);
     }
 
+    name() {
+        return this.assert.name.replace("==>", "➡️");
+    }
     json() {
         return {
             // "rawAssert": this.assert,
-            'title': this.assert.name,
-            'fullTitle': this.assert.name,
+            'title': this.name(),
+            'fullTitle': this.name(),
             'timedOut': false,
             'duration': 0,
             'speed': 'fast',
@@ -74,8 +71,8 @@ function formatError (diag){
         'name':"",
         'message':"",
         "showDiff": true,
-        'actual':diag.actual,
-        'expected':diag.expected,
+        'actual':diag.data ? (diag.data.got || diag.data.actual)  : (diag.got  || diag.actual),
+        'expected':diag.data ? (diag.data.expected || diag.data.expect )  : (diag.expected || diag.data.expect),
     }
     return {};
 }
