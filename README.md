@@ -1,6 +1,5 @@
 # tap-mochawesome-reporter
 
-<img align="right" src="https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png?raw=true" alt="Mochawesome Report" width="55%" />
 
 Turns your .tap file into .json for gorgeous [Mochawesome](https://github.com/adamgruber/mochawesome) report generator!
 
@@ -12,7 +11,7 @@ Turns your .tap file into .json for gorgeous [Mochawesome](https://github.com/ad
 ## Usage
 
 
-    tap test/*.js | node_modules/.bin/tap-mochawesome-reporter > test_output.json
+    tap test/*.js | tap-mochawesome-reporter > test_output.json
     marge test_output.json
 
     ✓ Reports saved:
@@ -20,5 +19,6 @@ Turns your .tap file into .json for gorgeous [Mochawesome](https://github.com/ad
 
 
 ## [Result](https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png) (Is really gorgeous!)
+<img align="right" src="https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png?raw=true" alt="Mochawesome Report" width="55%" />
 
 ## [mochawesome-report-generator](https://github.com/adamgruber/mochawesome-report-generator) repo
