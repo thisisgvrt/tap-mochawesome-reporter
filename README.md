@@ -1,6 +1,6 @@
 # tap-mochawesome-reporter
 
-<img align="right" src="./docs/marge-report-1.0.1.png" alt="Mochawesome Report" width="55%" />
+<img align="right" src="https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png?raw=true" alt="Mochawesome Report" width="55%" />
 
 Turns your .tap file into .json for gorgeous [Mochawesome](https://github.com/adamgruber/mochawesome) report generator!
 
