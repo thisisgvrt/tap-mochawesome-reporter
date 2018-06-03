@@ -18,7 +18,7 @@ Turns your .tap file into .json for gorgeous [Mochawesome](https://github.com/ad
     myproject/mochawesome-report/test_output.html
 
 
-## [Result](https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png) (Is really gorgeous!)
+## [Result](https://darvin.github.io/MMATestSuiteGenerator/Results/Mathematica_10/Function_Tests.html) (Is really gorgeous!)
 <img align="right" src="https://github.com/adamgruber/mochawesome-report-generator/blob/master/docs/marge-report-1.0.1.png?raw=true" alt="Mochawesome Report" width="55%" />
 
 ## [mochawesome-report-generator](https://github.com/adamgruber/mochawesome-report-generator) repo
