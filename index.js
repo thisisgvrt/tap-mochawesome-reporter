@@ -72,7 +72,7 @@ function formatError (diag){
         'message':"",
         "showDiff": true,
         'actual':diag.data ? (diag.data.got || diag.data.actual)  : (diag.got  || diag.actual),
-        'expected':diag.data ? (diag.data.expected || diag.data.expect )  : (diag.expected || diag.data.expect),
+        'expected':diag.data ? (diag.data.expected || diag.data.expect )  : (diag.expected || diag.expect),
     }
     return {};
 }
